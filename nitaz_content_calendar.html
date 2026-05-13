@@ -1,0 +1,413 @@
+
+<h2 class="sr-only">Nitaz Official — 4-Week Social Media Content Calendar for Instagram and TikTok</h2>
+
+<style>
+:root {
+  --ig: #E1306C;
+  --tt: #010101;
+  --ig-bg: #FBEAF0;
+  --tt-bg: #E6F1FB;
+  --ig-text: #72243E;
+  --tt-text: #0C447C;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.cal-wrap { padding: 1rem 0; }
+.legend { display: flex; gap: 16px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--color-text-secondary); }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-ig { background: var(--ig); }
+.dot-tt { background: #378ADD; }
+.pillar-key { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.5rem; }
+.pk { font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
+.pk-st { background: #EEEDFE; color: #3C3489; }
+.pk-bts { background: #EAF3DE; color: #27500A; }
+.pk-fin { background: #FAEEDA; color: #633806; }
+.pk-ugc { background: #FAECE7; color: #712B13; }
+.pk-con { background: #E1F5EE; color: #085041; }
+.pk-cta { background: #FCEBEB; color: #791F1F; }
+
+.week-tabs { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.wtab { font-size: 13px; padding: 6px 16px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; }
+.wtab.active { background: var(--color-background-secondary); color: var(--color-text-primary); border-color: var(--color-border-secondary); font-weight: 500; }
+
+.week-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px; }
+.day-col { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); overflow: hidden; }
+.day-header { padding: 8px 10px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.day-name { font-size: 12px; font-weight: 500; color: var(--color-text-primary); }
+.day-date { font-size: 11px; color: var(--color-text-tertiary); }
+.day-posts { padding: 6px 8px; display: flex; flex-direction: column; gap: 6px; }
+.post-card { border-radius: 6px; padding: 7px 9px; }
+.post-card.ig { background: var(--ig-bg); border-left: 3px solid var(--ig); }
+.post-card.tt { background: var(--tt-bg); border-left: 3px solid #378ADD; }
+.post-platform { font-size: 10px; font-weight: 500; letter-spacing: 0.03em; display: flex; align-items: center; gap: 4px; margin-bottom: 3px; }
+.post-platform.ig { color: var(--ig-text); }
+.post-platform.tt { color: var(--tt-text); }
+.post-title { font-size: 12px; color: var(--color-text-primary); line-height: 1.4; font-weight: 500; }
+.post-pillar { font-size: 10px; margin-top: 3px; padding: 2px 6px; border-radius: 10px; display: inline-block; }
+.post-format { font-size: 10px; color: var(--color-text-tertiary); margin-top: 2px; }
+.no-post { padding: 10px 8px; font-size: 11px; color: var(--color-text-tertiary); font-style: italic; }
+.week-hide { display: none; }
+
+.strategy-note { margin-top: 1.25rem; background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; }
+.strategy-note h3 { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; }
+.strategy-note p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+
+.summary-bar { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+.sum-card { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 10px 14px; flex: 1; min-width: 100px; }
+.sum-label { font-size: 11px; color: var(--color-text-secondary); margin-bottom: 2px; }
+.sum-val { font-size: 20px; font-weight: 500; color: var(--color-text-primary); }
+</style>
+
+<div class="cal-wrap">
+  <div class="summary-bar">
+    <div class="sum-card"><div class="sum-label">Posts per week</div><div class="sum-val">5–6</div></div>
+    <div class="sum-card"><div class="sum-label">Platforms</div><div class="sum-val">IG + TT</div></div>
+    <div class="sum-card"><div class="sum-label">Content pillars</div><div class="sum-val">6</div></div>
+    <div class="sum-card"><div class="sum-label">Weeks planned</div><div class="sum-val">4</div></div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><div class="dot dot-ig"></div> Instagram (Reel / Carousel / Story)</div>
+    <div class="legend-item"><div class="dot dot-tt"></div> TikTok (Video)</div>
+  </div>
+
+  <div class="pillar-key">
+    <span class="pk pk-st">Storytelling</span>
+    <span class="pk pk-bts">Behind the scenes</span>
+    <span class="pk pk-fin">Finished dress</span>
+    <span class="pk pk-ugc">Client UGC</span>
+    <span class="pk pk-con">Education / Tips</span>
+    <span class="pk pk-cta">Conversion / CTA</span>
+  </div>
+
+  <div class="week-tabs">
+    <button class="wtab active" onclick="showWeek(0, this)">Week 1</button>
+    <button class="wtab" onclick="showWeek(1, this)">Week 2</button>
+    <button class="wtab" onclick="showWeek(2, this)">Week 3</button>
+    <button class="wtab" onclick="showWeek(3, this)">Week 4</button>
+  </div>
+
+  <!-- WEEK 1 -->
+  <div class="week-grid week-block" id="week-0">
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Monday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">"The first dress I ever made for a bride" — designer origin story</div>
+          <div class="post-pillar pk pk-st">Storytelling</div>
+          <div class="post-format">Reel · talking to camera + B-roll of early work</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Tuesday</div></div>
+      <div class="day-posts">
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">Sketch to silhouette — designer draws a gown concept live, narrates the vision</div>
+          <div class="post-pillar pk pk-bts">Behind the scenes</div>
+          <div class="post-format">Video · ASMR sketch sounds + voiceover</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Wednesday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">Finished dress reveal — full look with client story in caption</div>
+          <div class="post-pillar pk pk-fin">Finished dress</div>
+          <div class="post-format">Carousel · 5–7 slides, detail shots</div>
+        </div>
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">Same reveal — "she cried when she saw it" hook, before/after transition</div>
+          <div class="post-pillar pk pk-fin">Finished dress</div>
+          <div class="post-format">Video · trending transition sound</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Thursday</div></div>
+      <div class="day-posts">
+        <div class="no-post">Rest / stories only</div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Friday</div></div>
+      <div class="day-posts">
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">"Things brides tell me that break my heart" — relatable designer POV</div>
+          <div class="post-pillar pk pk-st">Storytelling</div>
+          <div class="post-format">Video · talking to camera, high-share potential</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Saturday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">Client UGC — bride in her Nitaz dress on the day, her words in caption</div>
+          <div class="post-pillar pk pk-ugc">Client UGC</div>
+          <div class="post-format">Reel or photo + Story reshare</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Sunday</div></div>
+      <div class="day-posts">
+        <div class="no-post">Rest / stories only</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 2 -->
+  <div class="week-grid week-block week-hide" id="week-1">
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Monday</div></div>
+      <div class="day-posts">
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">"How I became a fashion designer" — personal story with emotional hook</div>
+          <div class="post-pillar pk pk-st">Storytelling</div>
+          <div class="post-format">Video · talking to camera, 60–90 sec</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Tuesday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">Behind the scenes — fabric selection process for a current order</div>
+          <div class="post-pillar pk pk-bts">Behind the scenes</div>
+          <div class="post-format">Reel · 30–45 sec, upbeat music</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Wednesday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">"What to look for in a bridal designer" — education for brides-to-be</div>
+          <div class="post-pillar pk pk-con">Education / Tips</div>
+          <div class="post-format">Carousel · 5 slides, saves-driven</div>
+        </div>
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">Same tip content — "3 things your designer should tell you" hook</div>
+          <div class="post-pillar pk pk-con">Education / Tips</div>
+          <div class="post-format">Video · text-on-screen list format</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Thursday</div></div>
+      <div class="day-posts">
+        <div class="no-post">Rest / stories only</div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Friday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">Finished dress — detail close-ups, fabric texture, embellishments</div>
+          <div class="post-pillar pk pk-fin">Finished dress</div>
+          <div class="post-format">Carousel · detail-forward, 6–8 slides</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Saturday</div></div>
+      <div class="day-posts">
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">"We only take [X] clients per month — here is why" — scarcity + process</div>
+          <div class="post-pillar pk pk-cta">Conversion / CTA</div>
+          <div class="post-format">Video · talking to camera, booking CTA at end</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Sunday</div></div>
+      <div class="day-posts">
+        <div class="no-post">Rest / stories only</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 3 -->
+  <div class="week-grid week-block week-hide" id="week-2">
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Monday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">"A dress that made me cry" — emotional storytelling about a standout piece</div>
+          <div class="post-pillar pk pk-st">Storytelling</div>
+          <div class="post-format">Reel · designer narrates over footage of the gown</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Tuesday</div></div>
+      <div class="day-posts">
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">Raw studio day — cutting, pinning, fitting. No music, just the process sounds</div>
+          <div class="post-pillar pk pk-bts">Behind the scenes</div>
+          <div class="post-format">Video · ASMR-style, no voiceover</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Wednesday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">Client story series — "This bride wanted X, we built Y, she got both"</div>
+          <div class="post-pillar pk pk-ugc">Client UGC</div>
+          <div class="post-format">Carousel · client photo + designer note</div>
+        </div>
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">"Nigerian brides deserve better" — opinion hook on bridal fashion standards</div>
+          <div class="post-pillar pk pk-st">Storytelling</div>
+          <div class="post-format">Video · controversial hook, high comment potential</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Thursday</div></div>
+      <div class="day-posts">
+        <div class="no-post">Rest / stories only</div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Friday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">Sketch reveal — original sketch side by side with finished gown</div>
+          <div class="post-pillar pk pk-fin">Finished dress</div>
+          <div class="post-format">Carousel · 2-slide before/after, swipe reveal</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Saturday</div></div>
+      <div class="day-posts">
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">"What it actually costs to make a custom wedding dress in Nigeria"</div>
+          <div class="post-pillar pk pk-con">Education / Tips</div>
+          <div class="post-format">Video · myth-busting, saves + shares</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Sunday</div></div>
+      <div class="day-posts">
+        <div class="no-post">Rest / stories only</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEEK 4 -->
+  <div class="week-grid week-block week-hide" id="week-3">
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Monday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">"The Nitaz wedding dress" — what makes the brand's signature style unique</div>
+          <div class="post-pillar pk pk-st">Storytelling</div>
+          <div class="post-format">Reel · brand identity video, polished edit</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Tuesday</div></div>
+      <div class="day-posts">
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">Fitting day — bride tries on her dress for the first time, genuine reaction</div>
+          <div class="post-pillar pk pk-ugc">Client UGC</div>
+          <div class="post-format">Video · emotional, raw, unscripted moment</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Wednesday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">Finished dress — full editorial-style shoot, styling notes in caption</div>
+          <div class="post-pillar pk pk-fin">Finished dress</div>
+          <div class="post-format">Carousel · 6–8 slides, best quality shots</div>
+        </div>
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">Same dress — "POV: you commission a Nitaz gown" storytelling angle</div>
+          <div class="post-pillar pk pk-fin">Finished dress</div>
+          <div class="post-format">Video · POV-style, trending audio</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Thursday</div></div>
+      <div class="day-posts">
+        <div class="no-post">Rest / stories only</div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Friday</div></div>
+      <div class="day-posts">
+        <div class="post-card ig">
+          <div class="post-platform ig"><i class="ti ti-brand-instagram" aria-hidden="true"></i> Instagram</div>
+          <div class="post-title">"Spots open for [next month] — here is how to book your consultation"</div>
+          <div class="post-pillar pk pk-cta">Conversion / CTA</div>
+          <div class="post-format">Reel or graphic · clear booking CTA, link in bio</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Saturday</div></div>
+      <div class="day-posts">
+        <div class="post-card tt">
+          <div class="post-platform tt"><i class="ti ti-brand-tiktok" aria-hidden="true"></i> TikTok</div>
+          <div class="post-title">"Month in the studio" recap — fast montage of all the work done this month</div>
+          <div class="post-pillar pk pk-bts">Behind the scenes</div>
+          <div class="post-format">Video · montage, uplifting audio, high saves</div>
+        </div>
+      </div>
+    </div>
+    <div class="day-col">
+      <div class="day-header"><div class="day-name">Sunday</div></div>
+      <div class="day-posts">
+        <div class="no-post">Rest / stories only</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strategy-note">
+    <h3>Key rules for this calendar</h3>
+    <p>Wednesday is always a double-post day — same content repurposed for both platforms. Thursday and Sunday are full rest days; use them only for Stories (polls, countdowns, behind-the-scenes casual clips). Every 4th week always ends with a conversion CTA post. The designer's face and voice must appear at least twice per week, especially on TikTok — that is the growth engine.</p>
+  </div>
+</div>
+
+<script>
+function showWeek(idx, btn) {
+  document.querySelectorAll('.week-block').forEach((el, i) => {
+    el.classList.toggle('week-hide', i !== idx);
+  });
+  document.querySelectorAll('.wtab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
