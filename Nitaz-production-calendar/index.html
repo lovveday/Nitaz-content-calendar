@@ -1,0 +1,338 @@
+
+<h2 class="sr-only">Nitaz Official — Full Month Production and Posting Calendar built around two Thursday shoot days</h2>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { padding: 1rem 0; font-family: var(--font-sans); }
+
+.top-tabs { display: flex; gap: 6px; margin-bottom: 1.25rem; flex-wrap: wrap; }
+.ttab { font-size: 13px; padding: 7px 18px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; }
+.ttab.active { background: var(--color-text-primary); color: var(--color-background-primary); border-color: var(--color-text-primary); font-weight: 500; }
+
+.view { display: none; }
+.view.active { display: block; }
+
+/* CALENDAR VIEW */
+.month-header { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 4px; margin-bottom: 4px; }
+.day-label { font-size: 10px; font-weight: 500; color: var(--color-text-tertiary); text-align: center; padding: 4px 0; }
+.month-grid { display: grid; grid-template-columns: repeat(7, minmax(0,1fr)); gap: 4px; }
+.cal-cell { min-height: 90px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); padding: 6px 7px; }
+.cal-cell.empty { background: transparent; border-color: transparent; }
+.cal-cell.shoot-day { background: #FAEEDA; border: 1.5px solid #EF9F27; }
+.cal-cell.rest-day { background: var(--color-background-secondary); }
+.cell-date { font-size: 11px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 4px; }
+.cal-cell.shoot-day .cell-date { color: #633806; }
+.shoot-badge { font-size: 9px; font-weight: 500; background: #EF9F27; color: #412402; padding: 2px 6px; border-radius: 10px; display: inline-block; margin-bottom: 4px; }
+.cal-post { font-size: 10px; line-height: 1.4; margin-bottom: 3px; display: flex; gap: 4px; align-items: flex-start; }
+.plat-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 3px; flex-shrink: 0; }
+.dot-ig { background: #E1306C; }
+.dot-tt { background: #378ADD; }
+.dot-both { background: linear-gradient(135deg, #E1306C 50%, #378ADD 50%); }
+.post-text { color: var(--color-text-primary); }
+.pillar-dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%; margin-right: 2px; }
+.p-st  { background: #7F77DD; }
+.p-bts { background: #639922; }
+.p-fin { background: #BA7517; }
+.p-ugc { background: #D85A30; }
+.p-con { background: #1D9E75; }
+.p-cta { background: #E24B4A; }
+.p-occ { background: #D4537E; }
+.rest-label { font-size: 10px; color: var(--color-text-tertiary); font-style: italic; }
+
+/* SHOOT DAY VIEW */
+.shoot-section { margin-bottom: 1.5rem; }
+.shoot-header { background: #FAEEDA; border: 1.5px solid #EF9F27; border-radius: var(--border-radius-lg); padding: 12px 16px; margin-bottom: 1rem; }
+.shoot-title { font-size: 15px; font-weight: 500; color: #412402; margin-bottom: 3px; }
+.shoot-sub { font-size: 12px; color: #633806; }
+.shoot-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.shoot-card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 12px 14px; }
+.sc-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.sc-item { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; padding: 4px 0; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; gap: 6px; }
+.sc-item:last-child { border-bottom: none; }
+.sc-num { font-size: 10px; font-weight: 500; color: var(--color-text-tertiary); min-width: 14px; }
+.tag-sm { font-size: 9px; padding: 1px 5px; border-radius: 8px; font-weight: 500; white-space: nowrap; }
+.tag-ig { background: #FBEAF0; color: #72243E; }
+.tag-tt { background: #E6F1FB; color: #0C447C; }
+.tag-both { background: #EAF3DE; color: #27500A; }
+
+/* POST SCHEDULE VIEW */
+.week-block-ps { margin-bottom: 1.5rem; }
+.week-title-ps { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 8px; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.ps-row { display: grid; grid-template-columns: 80px 1fr; gap: 10px; padding: 8px 0; border-bottom: 0.5px solid var(--color-border-tertiary); align-items: start; }
+.ps-row:last-child { border-bottom: none; }
+.ps-day { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); }
+.ps-date { font-size: 10px; color: var(--color-text-tertiary); }
+.ps-posts { display: flex; flex-direction: column; gap: 5px; }
+.ps-post { display: flex; gap: 7px; align-items: flex-start; }
+.plat-pill { font-size: 10px; font-weight: 500; padding: 2px 7px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+.pp-ig { background: #FBEAF0; color: #72243E; }
+.pp-tt { background: #E6F1FB; color: #0C447C; }
+.ps-content { font-size: 11px; color: var(--color-text-primary); line-height: 1.45; }
+.ps-meta { font-size: 10px; color: var(--color-text-tertiary); margin-top: 1px; }
+.ps-rest { font-size: 11px; color: var(--color-text-tertiary); font-style: italic; }
+.shoot-row { background: #FAEEDA; border-radius: var(--border-radius-md); padding: 6px 10px; }
+.shoot-row .ps-day { color: #633806; }
+
+/* LEGEND */
+.legend-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 1.25rem; align-items: center; }
+.leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--color-text-secondary); }
+.leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+</style>
+
+<div class="wrap">
+  <div class="top-tabs">
+    <button class="ttab active" onclick="switchView('calendar', this)">Month view</button>
+    <button class="ttab" onclick="switchView('shootday', this)">Shoot day planner</button>
+    <button class="ttab" onclick="switchView('schedule', this)">Post schedule</button>
+  </div>
+
+  <div class="legend-row">
+    <div class="leg"><div class="leg-dot dot-ig"></div> Instagram</div>
+    <div class="leg"><div class="leg-dot dot-tt"></div> TikTok</div>
+    <div class="leg"><div class="leg-dot" style="background:#EF9F27"></div> Shoot day (Thu)</div>
+    <span style="font-size:11px;color:var(--color-text-tertiary);">Pillars:</span>
+    <div class="leg"><div class="leg-dot p-st"></div> Storytelling</div>
+    <div class="leg"><div class="leg-dot p-bts"></div> BTS</div>
+    <div class="leg"><div class="leg-dot p-fin"></div> Finished dress</div>
+    <div class="leg"><div class="leg-dot p-ugc"></div> Client UGC</div>
+    <div class="leg"><div class="leg-dot p-con"></div> Education</div>
+    <div class="leg"><div class="leg-dot p-cta"></div> Conversion</div>
+    <div class="leg"><div class="leg-dot p-occ"></div> Occasion</div>
+  </div>
+
+  <!-- ===== CALENDAR VIEW ===== -->
+  <div class="view active" id="view-calendar">
+    <div class="month-header">
+      <div class="day-label">Mon</div><div class="day-label">Tue</div><div class="day-label">Wed</div>
+      <div class="day-label">Thu</div><div class="day-label">Fri</div><div class="day-label">Sat</div><div class="day-label">Sun</div>
+    </div>
+    <div class="month-grid">
+      <!-- Week 1 -->
+      <div class="cal-cell">
+        <div class="cell-date">1</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-st"></span>"She turned 40 and owned the room" — birthday client story</div></div>
+      </div>
+      <div class="cal-cell rest-day"><div class="cell-date">2</div><div class="rest-label">Stories only</div></div>
+      <div class="cal-cell">
+        <div class="cell-date">3</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-fin"></span>Birthday gown reveal — carousel</div></div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-fin"></span>"POV: your 40th outfit just arrived"</div></div>
+      </div>
+      <div class="cal-cell shoot-day">
+        <div class="cell-date">4</div>
+        <div class="shoot-badge">SHOOT 1</div>
+        <div class="cal-post"><div class="post-text" style="color:#633806;font-size:10px;">Capture: 3 finished dresses · BTS footage · designer talking-to-cam · sketch process</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">5</div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-occ"></span>"Why your birthday deserves a dress made for you"</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">6</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-ugc"></span>Client at her event in her Nitaz dress</div></div>
+      </div>
+      <div class="cal-cell rest-day"><div class="cell-date">7</div><div class="rest-label">Stories only</div></div>
+
+      <!-- Week 2 -->
+      <div class="cal-cell">
+        <div class="cell-date">8</div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-st"></span>"How Nitaz started" — founder story, face on camera</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">9</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-bts"></span>Fabric sourcing / studio day reel</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">10</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-fin"></span>Owambe gown — rich fabric, bold silhouette</div></div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-fin"></span>"When she said owambe, we said statement"</div></div>
+      </div>
+      <div class="cal-cell rest-day"><div class="cell-date">11</div><div class="rest-label">Stories only — polls</div></div>
+      <div class="cal-cell">
+        <div class="cell-date">12</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-con"></span>"How to dress for your body type at an owambe" — carousel</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">13</div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-cta"></span>"We have 3 slots open — here is what working with Nitaz looks like"</div></div>
+      </div>
+      <div class="cal-cell rest-day"><div class="cell-date">14</div><div class="rest-label">Stories only</div></div>
+
+      <!-- Week 3 -->
+      <div class="cal-cell">
+        <div class="cell-date">15</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-st"></span>"A dress that made me cry" — emotional piece about a standout gown</div></div>
+      </div>
+      <div class="cal-cell rest-day"><div class="cell-date">16</div><div class="rest-label">Stories only</div></div>
+      <div class="cal-cell">
+        <div class="cell-date">17</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-ugc"></span>Client story — "she wanted X, we built it"</div></div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-st"></span>"Nigerian women deserve better from their designers" — hot take</div></div>
+      </div>
+      <div class="cal-cell shoot-day">
+        <div class="cell-date">18</div>
+        <div class="shoot-badge">SHOOT 2</div>
+        <div class="cal-post"><div class="post-text" style="color:#633806;font-size:10px;">Capture: 2–3 more dresses · fitting moment · sketch-to-dress reveal · month recap footage</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">19</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-fin"></span>Sketch vs finished dress — side by side swipe reveal</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">20</div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-con"></span>"What a custom dress actually costs in Nigeria" — myth-busting</div></div>
+      </div>
+      <div class="cal-cell rest-day"><div class="cell-date">21</div><div class="rest-label">Stories only</div></div>
+
+      <!-- Week 4 -->
+      <div class="cal-cell">
+        <div class="cell-date">22</div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-st"></span>"Timeless elegance — what that means when I make your dress"</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">23</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-occ"></span>Graduation or gala dress — "you worked for this moment"</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">24</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-fin"></span>Month's best dress — standout carousel</div></div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-bts"></span>"A month of making women the most beautiful in the room" — montage</div></div>
+      </div>
+      <div class="cal-cell rest-day"><div class="cell-date">25</div><div class="rest-label">Stories — "what is your next occasion?"</div></div>
+      <div class="cal-cell">
+        <div class="cell-date">26</div>
+        <div class="cal-post"><div class="plat-dot dot-ig"></div><div class="post-text"><span class="pillar-dot p-cta"></span>"Booking open for next month — what is your occasion?"</div></div>
+      </div>
+      <div class="cal-cell">
+        <div class="cell-date">27</div>
+        <div class="cal-post"><div class="plat-dot dot-tt"></div><div class="post-text"><span class="pillar-dot p-ugc"></span>Fitting day or event reaction — raw, unscripted client moment</div></div>
+      </div>
+      <div class="cal-cell rest-day"><div class="cell-date">28</div><div class="rest-label">Stories only</div></div>
+    </div>
+  </div>
+
+  <!-- ===== SHOOT DAY PLANNER ===== -->
+  <div class="view" id="view-shootday">
+    <div class="shoot-section">
+      <div class="shoot-header">
+        <div class="shoot-title">Shoot Day 1 — Thursday, Week 1</div>
+        <div class="shoot-sub">This shoot feeds Weeks 1 & 2 content. Plan for approx. 4–5 hours. Have dresses pressed and ready before the day.</div>
+      </div>
+      <div class="shoot-cols">
+        <div class="shoot-card">
+          <div class="sc-title"><i class="ti ti-camera" aria-hidden="true" style="font-size:16px;"></i> Finished dresses to shoot</div>
+          <div class="sc-item"><span class="sc-num">1</span><span>Birthday gown — full body shots, detail closeups, fabric texture. 6–8 usable frames for carousel.</span><span class="tag-sm tag-ig">IG</span></div>
+          <div class="sc-item"><span class="sc-num">2</span><span>Owambe gown — full look, movement shots if possible, bold silhouette angles.</span><span class="tag-sm tag-both">Both</span></div>
+          <div class="sc-item"><span class="sc-num">3</span><span>Third dress (any current finished piece) — at minimum 4 clean shots for future carousel.</span><span class="tag-sm tag-ig">IG</span></div>
+        </div>
+        <div class="shoot-card">
+          <div class="sc-title"><i class="ti ti-video" aria-hidden="true" style="font-size:16px;"></i> Video content to capture</div>
+          <div class="sc-item"><span class="sc-num">1</span><span>Designer talking to camera — "she turned 40 and wanted to own the room." 60–90 sec, one take, natural.</span><span class="tag-sm tag-tt">TikTok</span></div>
+          <div class="sc-item"><span class="sc-num">2</span><span>Sketch process — pencil on paper, close-up, no talking needed. 30–60 sec raw footage.</span><span class="tag-sm tag-tt">TikTok</span></div>
+          <div class="sc-item"><span class="sc-num">3</span><span>BTS — rack of clothes, hands at work, fabric being handled. Silent or with ambient sound.</span><span class="tag-sm tag-ig">IG</span></div>
+          <div class="sc-item"><span class="sc-num">4</span><span>Birthday gown reveal — slow pan or transition-style reveal video for TikTok POV post.</span><span class="tag-sm tag-both">Both</span></div>
+        </div>
+        <div class="shoot-card">
+          <div class="sc-title"><i class="ti ti-microphone" aria-hidden="true" style="font-size:16px;"></i> Talking-to-camera scripts</div>
+          <div class="sc-item"><span class="sc-num">1</span><span>"She turned 40 and told me she wanted to walk in and feel like the room stopped." — open this way, tell the story.</span></div>
+          <div class="sc-item"><span class="sc-num">2</span><span>"Why does your birthday deserve a custom dress?" — opinion piece, 45 sec max, direct to lens.</span></div>
+          <div class="sc-item"><span class="sc-num">3</span><span>"How Nitaz started" — founder story, keep it under 90 sec, personal and honest.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="shoot-section">
+      <div class="shoot-header">
+        <div class="shoot-title">Shoot Day 2 — Thursday, Week 3</div>
+        <div class="shoot-sub">This shoot feeds Weeks 3 & 4 content. Focus on emotional and brand-identity material. Also grab month recap footage.</div>
+      </div>
+      <div class="shoot-cols">
+        <div class="shoot-card">
+          <div class="sc-title"><i class="ti ti-camera" aria-hidden="true" style="font-size:16px;"></i> Finished dresses to shoot</div>
+          <div class="sc-item"><span class="sc-num">1</span><span>The month's best dress — this is the hero piece for Week 4 carousel. Treat this as editorial. Best lighting, cleanest background.</span><span class="tag-sm tag-ig">IG</span></div>
+          <div class="sc-item"><span class="sc-num">2</span><span>Graduation or gala dress — full body + detail shots. Occasion framing in caption.</span><span class="tag-sm tag-ig">IG</span></div>
+          <div class="sc-item"><span class="sc-num">3</span><span>Original sketch next to finished dress — flat lay or side-by-side setup. One clean shot is enough.</span><span class="tag-sm tag-both">Both</span></div>
+        </div>
+        <div class="shoot-card">
+          <div class="sc-title"><i class="ti ti-video" aria-hidden="true" style="font-size:16px;"></i> Video content to capture</div>
+          <div class="sc-item"><span class="sc-num">1</span><span>Month recap B-roll — hands sewing, dresses on rack, fabric rolls, the studio in motion. 2–3 min raw, edit down to 30 sec.</span><span class="tag-sm tag-tt">TikTok</span></div>
+          <div class="sc-item"><span class="sc-num">2</span><span>Sketch-to-dress reveal — film the sketch, cut to the dress. Transition moment.</span><span class="tag-sm tag-both">Both</span></div>
+          <div class="sc-item"><span class="sc-num">3</span><span>Designer talking to cam — "timeless elegance" brand definition. Personal, unhurried.</span><span class="tag-sm tag-tt">TikTok</span></div>
+        </div>
+        <div class="shoot-card">
+          <div class="sc-title"><i class="ti ti-microphone" aria-hidden="true" style="font-size:16px;"></i> Talking-to-camera scripts</div>
+          <div class="sc-item"><span class="sc-num">1</span><span>"A dress that made me cry" — pick a real story from a real client. Tell it plainly. Don't over-rehearse.</span></div>
+          <div class="sc-item"><span class="sc-num">2</span><span>"Nigerian women deserve better from their designers" — hot take, specific, not vague. State the problem clearly.</span></div>
+          <div class="sc-item"><span class="sc-num">3</span><span>"Timeless elegance is not about the trend. It is about the woman." — 45 sec brand statement.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== POST SCHEDULE VIEW ===== -->
+  <div class="view" id="view-schedule">
+    <div class="week-block-ps">
+      <div class="week-title-ps">Week 1 — Milestone birthdays</div>
+      <div class="ps-row"><div><div class="ps-day">Monday</div><div class="ps-date">Day 1</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">"She turned 40 and walked in like she owned the room" — client birthday story reel</div><div class="ps-meta">Reel · designer narrates · shot on Shoot Day 1</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Tuesday</div><div class="ps-date">Day 2</div></div><div class="ps-posts"><div class="ps-rest">Stories only — "what is your next big occasion?" question sticker</div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Wednesday</div><div class="ps-date">Day 3</div></div><div class="ps-posts">
+        <div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">Birthday gown full reveal</div><div class="ps-meta">Carousel 6–8 slides · detail shots from Shoot Day 1</div></div></div>
+        <div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"POV: your 40th birthday outfit just arrived" — same dress, POV hook</div><div class="ps-meta">Video · trending audio · repurposed from same shoot</div></div></div>
+      </div></div>
+      <div class="ps-row shoot-row"><div><div class="ps-day">Thursday</div><div class="ps-date">Day 4</div></div><div class="ps-posts"><div class="ps-rest">🎬 SHOOT DAY 1 — no posting. See Shoot Day Planner tab for full list.</div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Friday</div><div class="ps-date">Day 5</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"Why your birthday deserves a dress made for you, not bought off a rack"</div><div class="ps-meta">Video · opinion hook · talking to camera · high share potential</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Saturday</div><div class="ps-date">Day 6</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">Client at her birthday event in her Nitaz dress</div><div class="ps-meta">Reel or photo · her words in caption · tag and encourage reshare</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Sunday</div><div class="ps-date">Day 7</div></div><div class="ps-posts"><div class="ps-rest">Stories only</div></div></div>
+    </div>
+
+    <div class="week-block-ps">
+      <div class="week-title-ps">Week 2 — Owambe & events</div>
+      <div class="ps-row"><div><div class="ps-day">Monday</div><div class="ps-date">Day 8</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"How Nitaz started — and why every dress is built for a specific moment"</div><div class="ps-meta">Video · founder story · face on camera · shot on Shoot Day 1</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Tuesday</div><div class="ps-date">Day 9</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">BTS — fabric sourcing or studio in motion</div><div class="ps-meta">Reel · 30–45 sec · BTS footage from Shoot Day 1</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Wednesday</div><div class="ps-date">Day 10</div></div><div class="ps-posts">
+        <div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">Owambe gown reveal — rich fabric, bold silhouette</div><div class="ps-meta">Carousel · detail-forward · from Shoot Day 1</div></div></div>
+        <div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"When she said owambe, we said statement"</div><div class="ps-meta">Video · voiceover storytelling + dress reveal · same footage</div></div></div>
+      </div></div>
+      <div class="ps-row"><div><div class="ps-day">Thursday</div><div class="ps-date">Day 11</div></div><div class="ps-posts"><div class="ps-rest">Stories only — "which colour do you reach for at an owambe?" poll</div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Friday</div><div class="ps-date">Day 12</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">"How to dress for your body type at an owambe" — save-worthy tips</div><div class="ps-meta">Carousel 5–6 slides · education content · designed for saves</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Saturday</div><div class="ps-date">Day 13</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"We have 3 slots open this month — here is what working with Nitaz looks like"</div><div class="ps-meta">Video · process walkthrough · end with booking CTA</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Sunday</div><div class="ps-date">Day 14</div></div><div class="ps-posts"><div class="ps-rest">Stories only</div></div></div>
+    </div>
+
+    <div class="week-block-ps">
+      <div class="week-title-ps">Week 3 — Weddings & introductions</div>
+      <div class="ps-row"><div><div class="ps-day">Monday</div><div class="ps-date">Day 15</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">"A dress that made me cry" — real story behind a standout gown</div><div class="ps-meta">Reel · designer narrates over footage of the dress</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Tuesday</div><div class="ps-date">Day 16</div></div><div class="ps-posts"><div class="ps-rest">Stories only — "white or colour for an intro ceremony?" poll</div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Wednesday</div><div class="ps-date">Day 17</div></div><div class="ps-posts">
+        <div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">Client story — "she wanted X, we gave her both" + her photo in the dress</div><div class="ps-meta">Carousel · client photo + designer note · UGC anchor</div></div></div>
+        <div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"Nigerian women deserve better from their designers" — hot take</div><div class="ps-meta">Video · strong opinion · designed for comments · high reach</div></div></div>
+      </div></div>
+      <div class="ps-row shoot-row"><div><div class="ps-day">Thursday</div><div class="ps-date">Day 18</div></div><div class="ps-posts"><div class="ps-rest">🎬 SHOOT DAY 2 — no posting. See Shoot Day Planner tab for full list.</div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Friday</div><div class="ps-date">Day 19</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">Original sketch next to finished dress — swipe reveal</div><div class="ps-meta">Carousel 2-slide · sketch photo + finished gown · shot on Shoot Day 2</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Saturday</div><div class="ps-date">Day 20</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"What a custom dress actually costs in Nigeria" — myth-busting, honest</div><div class="ps-meta">Video · education + trust-building · high saves and shares</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Sunday</div><div class="ps-date">Day 21</div></div><div class="ps-posts"><div class="ps-rest">Stories only</div></div></div>
+    </div>
+
+    <div class="week-block-ps">
+      <div class="week-title-ps">Week 4 — Brand identity & graduation/gala</div>
+      <div class="ps-row"><div><div class="ps-day">Monday</div><div class="ps-date">Day 22</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"Timeless elegance — what that actually means when I am making your dress"</div><div class="ps-meta">Video · brand definition · designer in her own words · shot on Shoot Day 2</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Tuesday</div><div class="ps-date">Day 23</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">Graduation or gala dress — "you worked for this moment, dress like it"</div><div class="ps-meta">Carousel · occasion framing in caption · from Shoot Day 2</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Wednesday</div><div class="ps-date">Day 24</div></div><div class="ps-posts">
+        <div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">Month's best dress — the standout piece, editorial treatment</div><div class="ps-meta">Carousel · best images of the month · hero post</div></div></div>
+        <div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">"A month of making women the most beautiful in the room" — studio montage</div><div class="ps-meta">Video · recap · emotional audio · high shares · from Shoot Day 2 B-roll</div></div></div>
+      </div></div>
+      <div class="ps-row"><div><div class="ps-day">Thursday</div><div class="ps-date">Day 25</div></div><div class="ps-posts"><div class="ps-rest">Stories only — "what is your next special occasion?" question sticker</div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Friday</div><div class="ps-date">Day 26</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-ig">Instagram</span><div><div class="ps-content">"Booking open for next month — tell us your occasion in the comments"</div><div class="ps-meta">Reel or graphic · soft CTA · comment-driving · link in bio</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Saturday</div><div class="ps-date">Day 27</div></div><div class="ps-posts"><div class="ps-post"><span class="plat-pill pp-tt">TikTok</span><div><div class="ps-content">Fitting day or event reaction — raw, unscripted client moment</div><div class="ps-meta">Video · emotional · no heavy edit needed · genuine reaction</div></div></div></div></div>
+      <div class="ps-row"><div><div class="ps-day">Sunday</div><div class="ps-date">Day 28</div></div><div class="ps-posts"><div class="ps-rest">Stories only</div></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+function switchView(id, btn) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.getElementById('view-' + id).classList.add('active');
+  document.querySelectorAll('.ttab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
