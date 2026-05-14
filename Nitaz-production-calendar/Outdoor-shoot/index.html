@@ -1,0 +1,689 @@
+
+<h2 class="sr-only">Nitaz Official — Revised video scripts for Videos 1, 2 and 3</h2>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+.wrap { padding: 1rem 0; font-family: var(--font-sans); }
+
+.vid-tabs { display: flex; gap: 6px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+.vtab { font-size: 12px; padding: 7px 16px; border-radius: var(--border-radius-md); border: 0.5px solid var(--color-border-tertiary); background: var(--color-background-primary); color: var(--color-text-secondary); cursor: pointer; }
+.vtab.active { background: #1a1a1a; color: #fff; border-color: #1a1a1a; font-weight: 500; }
+
+.vid-block { display: none; }
+.vid-block.active { display: block; }
+
+.film-header { background: #1a1a1a; border-radius: var(--border-radius-lg); padding: 16px 18px; margin-bottom: 1.25rem; }
+.fh-version { font-size: 10px; font-weight: 500; color: #666; margin-bottom: 3px; letter-spacing: 0.06em; }
+.fh-label { font-size: 11px; font-weight: 500; color: #888; margin-bottom: 4px; }
+.fh-title { font-size: 18px; font-weight: 500; color: #fff; margin-bottom: 6px; }
+.fh-logline { font-size: 13px; color: #bbb; line-height: 1.6; margin-bottom: 10px; }
+.fh-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.fh-pill { font-size: 10px; padding: 3px 9px; border-radius: 10px; background: rgba(255,255,255,0.1); color: #ccc; font-weight: 500; }
+
+.alt-header { border-radius: var(--border-radius-lg); padding: 14px 16px; margin-bottom: 1.25rem; }
+.alt-a { background: #EEEDFE; }
+.alt-b { background: #EAF3DE; }
+.alt-label { font-size: 10px; font-weight: 500; letter-spacing: 0.06em; margin-bottom: 3px; }
+.alt-a .alt-label { color: #5B56B0; }
+.alt-b .alt-label { color: #27500A; }
+.alt-title { font-size: 15px; font-weight: 500; margin-bottom: 5px; }
+.alt-a .alt-title { color: #3C3489; }
+.alt-b .alt-title { color: #1E4008; }
+.alt-logline { font-size: 13px; line-height: 1.6; }
+.alt-a .alt-logline { color: #5B56B0; }
+.alt-b .alt-logline { color: #2D5A10; }
+
+.merge-note { background: #FAEEDA; border-radius: var(--border-radius-md); padding: 10px 14px; margin-bottom: 1.25rem; display: flex; gap: 10px; }
+.mn-label { font-size: 10px; font-weight: 500; color: #633806; white-space: nowrap; margin-top: 1px; }
+.mn-text { font-size: 12px; color: #412402; line-height: 1.6; }
+
+.section-title { font-size: 12px; font-weight: 500; color: var(--color-text-primary); margin: 1.25rem 0 8px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+.scene-block { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); margin-bottom: 10px; overflow: hidden; }
+.scene-header { padding: 10px 14px; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--color-background-secondary); }
+.scene-num { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); min-width: 56px; }
+.scene-title { font-size: 13px; font-weight: 500; color: var(--color-text-primary); flex: 1; }
+.scene-time { font-size: 11px; color: var(--color-text-tertiary); white-space: nowrap; }
+.scene-loc { font-size: 10px; padding: 2px 8px; border-radius: 8px; background: #E6F1FB; color: #0C447C; white-space: nowrap; }
+.scene-end { background: #FCEBEB; }
+.scene-end .scene-title { color: #791F1F; }
+
+.shot-row { display: grid; grid-template-columns: 24px 88px 1fr 130px; gap: 10px; padding: 10px 14px; border-bottom: 0.5px solid var(--color-border-tertiary); align-items: start; }
+.shot-row:last-child { border-bottom: none; }
+.sn { font-size: 11px; font-weight: 500; color: var(--color-text-tertiary); padding-top: 2px; }
+.stype-badge { font-size: 10px; padding: 2px 7px; border-radius: 6px; background: var(--color-background-secondary); color: var(--color-text-secondary); display: inline-block; white-space: nowrap; }
+.sdesc { font-size: 12px; color: var(--color-text-primary); line-height: 1.55; }
+.sdesc .action { color: var(--color-text-secondary); font-size: 11px; margin-top: 4px; line-height: 1.5; }
+.sdir { font-size: 11px; color: var(--color-text-secondary); line-height: 1.5; font-style: italic; }
+
+.key-shot { background: #FEFBF0; }
+.key-badge { font-size: 9px; padding: 1px 6px; border-radius: 6px; background: #EF9F27; color: #412402; font-weight: 500; display: inline-block; margin-left: 5px; vertical-align: middle; }
+
+.end-block { border: 1.5px solid #E24B4A; border-radius: var(--border-radius-lg); margin-bottom: 10px; overflow: hidden; }
+.end-header { padding: 10px 14px; background: #FCEBEB; border-bottom: 0.5px solid #F4C0C0; display: flex; align-items: center; gap: 10px; }
+.end-num { font-size: 11px; font-weight: 500; color: #E24B4A; }
+.end-title { font-size: 13px; font-weight: 500; color: #791F1F; flex: 1; }
+.end-time { font-size: 11px; color: #E24B4A; }
+
+.divider { height: 0.5px; background: var(--color-border-tertiary); margin: 1.5rem 0; }
+
+.caption-block { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; margin-top: 1.25rem; }
+.cap-label { font-size: 10px; font-weight: 500; color: var(--color-text-tertiary); margin-bottom: 6px; letter-spacing: 0.05em; text-transform: uppercase; }
+.cap-text { font-size: 12px; color: var(--color-text-secondary); line-height: 1.8; white-space: pre-line; }
+</style>
+
+<div class="wrap">
+  <div class="vid-tabs">
+    <button class="vtab active" onclick="showVid('v1', this)">Video 1 — The dinner (rebuilt)</button>
+    <button class="vtab" onclick="showVid('v2', this)">Video 2 — Birthday (alt directions)</button>
+    <button class="vtab" onclick="showVid('v3', this)">Video 3 — Getting ready (alt directions)</button>
+  </div>
+
+  <!-- VIDEO 1 REBUILT -->
+  <div class="vid-block active" id="v1">
+    <div class="film-header">
+      <div class="fh-label">Black dress · Video 1 · Rebuilt · 90–120 seconds</div>
+      <div class="fh-title">"The dinner"</div>
+      <div class="fh-logline">Opens inside the restaurant on the prop couple — sweet words, a private moment. Then outside, Nitaz steps out of a car. The street stops. She walks in. The room shifts. And by the end, even the prop wife cannot pretend she is not impressed.</div>
+      <div class="fh-pills">
+        <span class="fh-pill">Anniversary dinner</span>
+        <span class="fh-pill">Hotel restaurant — outside + inside</span>
+        <span class="fh-pill">Layered ending</span>
+        <span class="fh-pill">Funny + romantic + brand</span>
+      </div>
+    </div>
+
+    <div class="section-title">Scene 1 — Opening: the prop couple inside</div>
+    <div class="scene-block">
+      <div class="scene-header">
+        <span class="scene-num">Scene 1</span>
+        <span class="scene-title">Sweet words — the setup</span>
+        <span class="scene-loc">Restaurant interior — prop couple's table</span>
+        <span class="scene-time">0:00 – 0:18</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">1</span>
+        <span class="stype-badge">Drift in</span>
+        <span class="sdesc">The camera drifts slowly into the restaurant — past tables, past soft light, until it finds the prop couple seated together. They are in their own world. He is leaning forward, talking to her quietly.
+          <div class="action">The opening has no urgency. It is warm and intimate. We are entering a world, not starting an action.</div>
+        </span>
+        <span class="sdir">Slow push-in or glide shot from the restaurant entrance moving toward their table. Like we are walking in and finding them.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">2</span>
+        <span class="stype-badge">Medium</span>
+        <span class="sdesc">The prop man, eyes on his wife, saying something sweet. He reaches across and takes her hand.
+          <div class="action">We do not hear the words but we feel them. "You are the most beautiful woman in the world" energy. She smiles — she believes him completely.</div>
+        </span>
+        <span class="sdir">This moment is the irony that makes the whole film work — he is saying she is the most beautiful, and the universe is about to test that statement. Plant it clearly.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">3</span>
+        <span class="stype-badge">Close-up</span>
+        <span class="sdesc">Her face — warm, happy, a little shy. She squeezes his hand. She believes every word.
+          <div class="action">Hold for 2 seconds. This is the emotional anchor we come back to later.</div>
+        </span>
+        <span class="sdir">Warm light on her face. She should look genuinely touched. This moment needs to be sweet enough that the audience likes her before the comedy hits.</span>
+      </div>
+    </div>
+
+    <div class="section-title">Scene 2 — Cut outside: the restaurant exterior</div>
+    <div class="scene-block">
+      <div class="scene-header">
+        <span class="scene-num">Scene 2</span>
+        <span class="scene-title">Where are we — establishing the world</span>
+        <span class="scene-loc">Restaurant exterior — outside</span>
+        <span class="scene-time">0:18 – 0:28</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">4</span>
+        <span class="stype-badge">Wide</span>
+        <span class="sdesc">Cut outside. The restaurant exterior — the building, the entrance, a couple of people outside. The world outside the restaurant. Small activity — a person on their phone, two people chatting near the entrance.
+          <div class="action">This shot tells the audience where we are and sets up the arrival. It should feel like a normal, calm evening outside a nice restaurant.</div>
+        </span>
+        <span class="sdir">Wide enough to see the full entrance and at least 2–3 people outside naturally positioned. Do not make them look like they are waiting — they are just existing.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">5</span>
+        <span class="stype-badge">Cut back</span>
+        <span class="sdesc">Brief cut back inside — the prop man still talking, still sweet. The wife laughing softly at something he said.
+          <div class="action">One last beat of their sweetness before everything changes.</div>
+        </span>
+        <span class="sdir">3 seconds maximum. Just enough to remind us they are there and they are happy. Then cut back outside for the arrival.</span>
+      </div>
+    </div>
+
+    <div class="section-title">Scene 3 — The arrival: she steps out of the car</div>
+    <div class="scene-block">
+      <div class="scene-header">
+        <span class="scene-num">Scene 3</span>
+        <span class="scene-title">She arrives</span>
+        <span class="scene-loc">Restaurant exterior — car arrival</span>
+        <span class="scene-time">0:28 – 0:48</span>
+      </div>
+      <div class="shot-row key-shot">
+        <span class="sn">6</span>
+        <span class="stype-badge">Wide</span>
+        <span class="sdesc">A car pulls up to the restaurant entrance. The door opens.
+          <div class="action">A beat of stillness. Then — her shoes touch the ground first. We see nothing else yet. Just the shoes stepping out onto the pavement.</div>
+        </span>
+        <span class="sdir">Shoot from low angle. The shoes hitting the ground is the first reveal of Nitaz. It builds anticipation. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+      <div class="shot-row key-shot">
+        <span class="sn">7</span>
+        <span class="stype-badge">Low → Wide</span>
+        <span class="sdesc">The camera rises slowly — from the shoes, up the dress, revealing the full look as she stands and straightens. The cup skirt. The embellishment. Her face last.
+          <div class="action">She does not look at the camera. She looks straight ahead — toward the restaurant entrance. She knows where she is going.</div>
+        </span>
+        <span class="sdir">This rising reveal shot is the visual centrepiece of the whole film. Do multiple takes. Start tight on the shoes, rise slowly, end on her face. Slow motion on the rise. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">8</span>
+        <span class="stype-badge">Cut sequence</span>
+        <span class="sdesc">The people outside — cut between 2–3 quick reaction shots. The person on their phone lowers it. The two people mid-conversation stop talking mid-sentence. A beat of silence before they all just stare.
+          <div class="action">No exaggeration. Just the natural human reaction to seeing something beautiful. One second each.</div>
+        </span>
+        <span class="sdir">Three cuts, one second each, fast. The edit creates the sense that everyone stopped at once. Then cut to her walking.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">9</span>
+        <span class="stype-badge">Tracking</span>
+        <span class="sdesc">Nitaz begins walking toward the restaurant entrance. The camera tracks alongside her or slightly ahead — capturing her full stride, the cup skirt moving with each step.
+          <div class="action">Unhurried. Confident. She is not performing — she is simply going to dinner.</div>
+        </span>
+        <span class="sdir">Track from the side so the silhouette of the cup skirt is visible. The movement of this dress walking is a visual asset — use it fully.</span>
+      </div>
+    </div>
+
+    <div class="section-title">Scene 4 — The walk inside: angles, details, the room</div>
+    <div class="scene-block">
+      <div class="scene-header">
+        <span class="scene-num">Scene 4</span>
+        <span class="scene-title">Inside the restaurant — the full showcase</span>
+        <span class="scene-loc">Restaurant interior — entrance through to the floor</span>
+        <span class="scene-time">0:48 – 1:15</span>
+      </div>
+      <div class="shot-row key-shot">
+        <span class="sn">10</span>
+        <span class="stype-badge">Through glass</span>
+        <span class="sdesc">Shot from inside the restaurant — through the glass door or window, we see Nitaz approaching from outside. She pushes the door open and steps in.
+          <div class="action">The inside world sees her before she fully arrives. The camera is waiting for her.</div>
+        </span>
+        <span class="sdir">This transition from outside to inside is cinematic and intentional. The audience feels like they are inside the restaurant watching her arrive. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">11</span>
+        <span class="stype-badge">Close-up</span>
+        <span class="sdesc">Her shoes on the restaurant floor — the sound of heels, the dress hem just above the knee, the embellishment catching the interior light.
+          <div class="action">Every step is deliberate. The shoes and the dress hem together in one frame.</div>
+        </span>
+        <span class="sdir">Low angle. This is the shot that connects the exterior walk to the interior walk. The shoes are a continuous thread through the whole arrival sequence.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">12</span>
+        <span class="stype-badge">Close-up</span>
+        <span class="sdesc">The dress detail — embellishment pattern, fabric texture, the design as she moves. The camera finds specific details: a cluster of embellishment, the hem, the waist.
+          <div class="action">Three or four detail inserts cut together quickly — 1 second each. The dress gets its full showcase here.</div>
+        </span>
+        <span class="sdir">Have a list of specific dress details to capture before the shoot. Each one gets its own 1-second insert. These details are what clients are watching for.</span>
+      </div>
+      <div class="shot-row key-shot">
+        <span class="sn">13</span>
+        <span class="stype-badge">Side angle</span>
+        <span class="sdesc">The critical angle — Nitaz walking in the foreground, the prop couple visible in the background at their table. Both in frame. She does not know they are watching. They do not know she is the reason the room shifted.
+          <div class="action">This single frame connects the two storylines — her walk and their reaction — without cutting away.</div>
+        </span>
+        <span class="sdir">This is a composition shot — it requires precise blocking. Nitaz walks left to right in the foreground. The prop couple must be positioned so they are visible but slightly out of focus in the background. Rehearse this specific angle before the shoot. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">14</span>
+        <span class="stype-badge">Cut to couple</span>
+        <span class="sdesc">The prop man's eyes drift from his wife toward Nitaz mid-sentence. He stops talking. The wife is still speaking — she has not noticed yet.
+          <div class="action">He is not being dramatic. His eyes just go. He cannot help it.</div>
+        </span>
+        <span class="sdir">Play this subtly. The comedy is in the involuntary nature of it — he is not trying to look, he just does.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">15</span>
+        <span class="stype-badge">Close-up</span>
+        <span class="sdesc">The wife mid-sentence, realising she has lost him. She follows his gaze. Then — she slaps his arm to get his attention back. Quick, sharp, clear.
+          <div class="action">He snaps back. Innocent face. She gives him a look. He picks up his glass.</div>
+        </span>
+        <span class="sdir">The arm slap lands harder than a hand slap and reads more naturally. Hold one extra beat after the slap for the audience to react.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">16</span>
+        <span class="stype-badge">Medium</span>
+        <span class="sdesc">A second couple at another table — a woman notices Nitaz, leans toward her companion and whispers something. Her companion looks up and nods. A shared moment of admiration.
+          <div class="action">This widens the room's reaction beyond just the prop couple. The whole restaurant is quietly aware of her.</div>
+        </span>
+        <span class="sdir">Keep this brief — 2 seconds. It is a supporting reaction, not a featured one. The prop couple is the comedy. This couple is the elegance.</span>
+      </div>
+      <div class="shot-row key-shot">
+        <span class="sn">17</span>
+        <span class="stype-badge">From behind</span>
+        <span class="sdesc">Shot from behind Nitaz's husband — his back to camera, standing, watching his wife walk toward him. Nitaz in full frame ahead of him, closing the distance. The restaurant behind her.
+          <div class="action">We see what he sees. We feel what he feels.</div>
+        </span>
+        <span class="sdir">This is a point-of-view shot — we are the husband. The audience falls a little in love with her through his eyes. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">18</span>
+        <span class="stype-badge">Close-up</span>
+        <span class="sdesc">His face — the slow smile of a man completely in love. Eyes fixed on her, not blinking. The kind of look that says he has seen her a hundred times and she still does this to him every single time.
+          <div class="action">Hold on his face for 3 full seconds. Do not cut away too early.</div>
+        </span>
+        <span class="sdir">This is one of the most important shots in the film — a man looking at his wife like that is one of the most universally moving images. Cast this look carefully.</span>
+      </div>
+    </div>
+
+    <div class="section-title">Scene 5 — She arrives at his side</div>
+    <div class="scene-block">
+      <div class="scene-header">
+        <span class="scene-num">Scene 5</span>
+        <span class="scene-title">She reaches him</span>
+        <span class="scene-loc">Their table</span>
+        <span class="scene-time">1:15 – 1:28</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">19</span>
+        <span class="stype-badge">Medium</span>
+        <span class="sdesc">Nitaz reaches her husband. He steps forward — not to hug immediately, just to be close. He looks at her like he is seeing her for the first time.
+          <div class="action">He says something — we do not hear it. She smiles in response. Whatever he said was the right thing.</div>
+        </span>
+        <span class="sdir">This moment is quiet and private — the restaurant carries on around them but the camera is only interested in them.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">20</span>
+        <span class="stype-badge">Close-up</span>
+        <span class="sdesc">He pulls out her chair. She sits. The cup skirt settles perfectly as she sits — the dress has one final moment of beauty before the scene changes.
+          <div class="action">Her hands smooth the dress as she sits. Deliberate and graceful.</div>
+        </span>
+        <span class="sdir">Capture the dress sitting down — the cup shape settling is a beautiful image and a last showcase of the silhouette.</span>
+      </div>
+    </div>
+
+    <div class="section-title">Scene 6 — The layered ending (three beats)</div>
+
+    <div class="end-block">
+      <div class="end-header">
+        <span class="end-num">Ending beat 1</span>
+        <span class="end-title">The funny callback — even she cannot resist</span>
+        <span class="end-time">1:28 – 1:40</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">21</span>
+        <span class="stype-badge">Cut to couple</span>
+        <span class="sdesc">Cut back to the prop couple. The man is being very well-behaved now — eyes forward, talking to his wife, overcompensating slightly.
+          <div class="action">Then the wife's eyes drift. She looks across at Nitaz seated at the table. She stares — admiring the dress. She cannot help it either.</div>
+        </span>
+        <span class="sdir">Mirror the earlier beat exactly — but now it is her. The audience sees the symmetry and laughs.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">22</span>
+        <span class="stype-badge">Close-up</span>
+        <span class="sdesc">The prop husband notices his wife staring this time. He raises an eyebrow at her — a slow, knowing look. She catches herself and snaps back.
+          <div class="action">They look at each other. A beat. Then they both laugh — at themselves, at the whole situation.</div>
+        </span>
+        <span class="sdir">This is the release. The audience has been waiting for this reversal since the arm slap. Let the laughter breathe for 2 seconds before cutting.</span>
+      </div>
+    </div>
+
+    <div class="end-block">
+      <div class="end-header">
+        <span class="end-num">Ending beat 2</span>
+        <span class="end-title">The romantic close — the real message</span>
+        <span class="end-time">1:40 – 1:52</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">23</span>
+        <span class="stype-badge">Medium</span>
+        <span class="sdesc">Back to Nitaz and her husband at their table. He leans forward and says something quietly in her ear. She closes her eyes briefly — whatever he said landed.
+          <div class="action">She opens her eyes and smiles — the private smile of a woman who feels completely seen.</div>
+        </span>
+        <span class="sdir">We do not hear what he says. It does not matter. The audience will project their own version of it. That is the point.</span>
+      </div>
+      <div class="shot-row key-shot">
+        <span class="sn">24</span>
+        <span class="stype-badge">Wide pull-back</span>
+        <span class="sdesc">The camera pulls back slowly — wide shot of the full restaurant. Their table in frame. The prop couple in frame. The second couple in frame. Life carrying on. And at the centre of it all, quietly, Nitaz.
+          <div class="action">Hold this wide shot for 4 full seconds. No cuts. Just the room.</div>
+        </span>
+        <span class="sdir">This is the most important frame in the film. Everything — the comedy, the romance, the admiration — all visible simultaneously. Take time to get this composition right. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+    </div>
+
+    <div class="end-block">
+      <div class="end-header">
+        <span class="end-num">Ending beat 3</span>
+        <span class="end-title">The brand — the last word</span>
+        <span class="end-time">1:52 – 2:00</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">25</span>
+        <span class="stype-badge">Close-up</span>
+        <span class="sdesc">One last close-up — the embellishment detail on the black dress. The same shot that opened the film, mirroring the beginning.
+          <div class="action">The film began with the dress. It ends with the dress. Everything in between is what this dress does to a room.</div>
+        </span>
+        <span class="sdir">Cut to black directly from the embellishment close-up. Then white text: "Timeless elegance." Hold. Then: "@nitazofficial_"</span>
+      </div>
+    </div>
+
+    <div class="caption-block">
+      <div class="cap-label">Suggested caption</div>
+      <div class="cap-text">He told her she was the most beautiful woman in the world.
+
+Then she walked in.
+
+(And even she had to agree 👀)
+
+This is what dressing for your moment looks like.
+Custom anniversary dress by Nitaz — for the woman who makes the room stop.
+
+Book your consultation. Link in bio.
+#nitazofficial #timelesselegance #specialoccasion #nigeriafashion #custommade</div>
+    </div>
+  </div>
+
+  <!-- VIDEO 2 — TWO DIRECTIONS -->
+  <div class="vid-block" id="v2">
+    <div class="film-header">
+      <div class="fh-label">Black dress · Video 2 · Two alternate directions</div>
+      <div class="fh-title">"The birthday entrance" — choose your direction</div>
+      <div class="fh-logline">Same dress, same occasion — two completely different ways to tell the story. Direction A is cinematic and emotional. Direction B is fun, social, and built for maximum shareability. Or merge them.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="alt-header alt-a">
+      <div class="alt-label">DIRECTION A</div>
+      <div class="alt-title">"She came. She turned 40. She conquered."</div>
+      <div class="alt-logline">A solo cinematic film. No friends, no big group. Just Nitaz, the hotel, and the moment. The emotional weight comes from what turning 40 means — not from the party around her.</div>
+    </div>
+
+    <div class="merge-note">
+      <span class="mn-label">Tone</span>
+      <span class="mn-text">Cinematic. Introspective. The voiceover or on-screen text carries the emotional story. The visuals are almost silent.</span>
+    </div>
+
+    <div class="section-title">Direction A — Scene by scene</div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 1</span><span class="scene-title">The number</span><span class="scene-loc">Hotel room</span><span class="scene-time">0:00 – 0:12</span></div>
+      <div class="shot-row">
+        <span class="sn">1</span><span class="stype-badge">Close-up</span>
+        <span class="sdesc">A birthday card or phone notification — "Happy 40th." Her hand sets it down. She stands up.
+          <div class="action">The number 40 is the entire context. No other explanation needed.</div>
+        </span>
+        <span class="sdir">The number does the emotional work. Every person watching has a milestone they are approaching or have passed.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">2</span><span class="stype-badge">On-screen text</span>
+        <span class="sdesc">Text appears over black: "40 years. Every one of them earned."
+          <div class="action">Hold for 2 seconds. Then cut to her walking out of the hotel room in the black dress — full look, fully ready.</div>
+        </span>
+        <span class="sdir">White text, black background. Simple font. The words should feel like a quiet declaration, not a celebration slogan.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 2</span><span class="scene-title">The arrival — she enters her own party alone</span><span class="scene-loc">Hotel staircase or entrance</span><span class="scene-time">0:12 – 0:40</span></div>
+      <div class="shot-row key-shot">
+        <span class="sn">3</span><span class="stype-badge">Low angle</span>
+        <span class="sdesc">Nitaz descends a hotel staircase — shot from the bottom looking up. Full black dress, cup skirt visible from below, embellishment catching the staircase light with each step.
+          <div class="action">Slow. Every step is intentional. She is not going down stairs. She is making an entrance.</div>
+        </span>
+        <span class="sdir">The staircase shot is the signature image of this direction. If the hotel has a grand staircase, use it. This is the one visual people will screenshot. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">4</span><span class="stype-badge">Close-up</span>
+        <span class="sdesc">Her hand on the stair rail. Her face — composed, a quiet smile. She is not nervous. She is ready.
+          <div class="action">Two inserts: hand on rail, then her face. Together they say: I have been waiting for this.</div>
+        </span>
+        <span class="sdir">Warm staircase light on her face if possible. This close-up should feel intimate and private.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 3</span><span class="scene-title">The reactions and the party</span><span class="scene-loc">Party space</span><span class="scene-time">0:40 – 1:05</span></div>
+      <div class="shot-row">
+        <span class="sn">5</span><span class="stype-badge">Wide</span>
+        <span class="sdesc">She enters the party space. The room reacts — but slowly, like a ripple. One person sees her, then the next, then the next.
+          <div class="action">Three reaction shots in sequence — admiring, respectful, warm. Not shock — recognition. They see a woman in her full power.</div>
+        </span>
+        <span class="sdir">This direction's reactions are quieter than Direction B. No jumping, no screaming. Just the universal human response to witnessing something truly beautiful.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">6</span><span class="stype-badge">Wide pull-back</span>
+        <span class="sdesc">Final wide shot — Nitaz in the party, the room around her. On-screen text fades in over the image: "The most beautiful woman in the room. Every time."
+          <div class="action">Hold for 4 seconds. Cut to brand end card.</div>
+        </span>
+        <span class="sdir">The text is the ending. It connects the film back to Nitaz's brand mission and makes the message explicit without anyone having to say a word.</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="alt-header alt-b">
+      <div class="alt-label">DIRECTION B</div>
+      <div class="alt-title">"Nobody was ready for her."</div>
+      <div class="alt-logline">Fun, energetic, social. This is the birthday video people tag their friends in. It opens with the friends already at the party hyping each other up — waiting, almost nervous on her behalf. Then she arrives and chaos (the good kind) breaks out.</div>
+    </div>
+
+    <div class="merge-note">
+      <span class="mn-label">Tone</span>
+      <span class="mn-text">Fun and warm. More energy. Reactions are bigger. Think the feeling of watching a real birthday entrance video that goes viral — but elevated.</span>
+    </div>
+
+    <div class="section-title">Direction B — Scene by scene</div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 1</span><span class="scene-title">The friends are waiting — and they are excited</span><span class="scene-loc">Party space</span><span class="scene-time">0:00 – 0:15</span></div>
+      <div class="shot-row">
+        <span class="sn">1</span><span class="stype-badge">Medium</span>
+        <span class="sdesc">Two or three friends at the party — one checks her phone, shows the screen to the others. They all laugh and look toward the entrance with anticipation.
+          <div class="action">We do not see the screen. We just know something is coming and they cannot wait.</div>
+        </span>
+        <span class="sdir">The friends are the hook. Their excitement transfers to the audience. We are now waiting with them.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 2</span><span class="scene-title">The entrance — nobody was ready</span><span class="scene-loc">Party entrance</span><span class="scene-time">0:15 – 0:40</span></div>
+      <div class="shot-row key-shot">
+        <span class="sn">2</span><span class="stype-badge">Wide</span>
+        <span class="sdesc">Nitaz appears in the doorway. Full stop. Black dress, embellishment, cup silhouette. She pauses — takes in the room — then walks in.
+          <div class="action">The friends see her first. One of them physically grabs the arm of another.</div>
+        </span>
+        <span class="sdir">The arm grab is the comedy beat of this direction — involuntary, instinctive, real. It is more relatable than the prop couple hand slap and works for a birthday energy. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">3</span><span class="stype-badge">Slow-mo</span>
+        <span class="sdesc">Slow motion — Nitaz walks into the party. The cup skirt moves. The embellishment catches the party light. Her face is calm amidst all the reaction around her.
+          <div class="action">She is unbothered. This is just Tuesday for a Nitaz woman.</div>
+        </span>
+        <span class="sdir">The contrast between her calm and everyone else's reaction is the comedic and aspirational core of this direction.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 3</span><span class="scene-title">The reactions — full energy</span><span class="scene-loc">Party space</span><span class="scene-time">0:40 – 1:05</span></div>
+      <div class="shot-row">
+        <span class="sn">4</span><span class="stype-badge">Cut sequence</span>
+        <span class="sdesc">Fast cuts — five reactions in five seconds: (a) a woman's jaw drops. (b) someone points. (c) a man does a double take. (d) a friend rushes toward her. (e) someone points their phone at her.
+          <div class="action">One second each. The edit is the comedy — rapid fire reactions create the feeling that the whole room exploded at once.</div>
+        </span>
+        <span class="sdir">Brief these five people specifically on what they are doing. One second reactions require precise timing — do a rehearsal pass before shooting.</span>
+      </div>
+      <div class="shot-row">
+        <span class="sn">5</span><span class="stype-badge">Medium</span>
+        <span class="sdesc">The friend reaches Nitaz — huge hug, pulls back, looks at the dress, grabs her shoulders, says something like "this dress!" We do not hear it but we read it.
+          <div class="action">The friend's reaction is the surrogate for every viewer who wants to be at that party.</div>
+        </span>
+        <span class="sdir">Direction B ends on joy — wide shot, Nitaz laughing with her friend, the party around her fully alive. Then cut to brand end card.</span>
+      </div>
+    </div>
+
+    <div class="merge-note">
+      <span class="mn-label">Merge idea</span>
+      <span class="mn-text">Open with Direction B (friends waiting, energetic entrance, big reactions) then transition into Direction A's ending — on-screen text "The most beautiful woman in the room. Every time." The energy of B with the brand weight of A. Strong combination.</span>
+    </div>
+  </div>
+
+  <!-- VIDEO 3 — TWO DIRECTIONS -->
+  <div class="vid-block" id="v3">
+    <div class="film-header">
+      <div class="fh-label">Black dress · Video 3 · Two alternate directions</div>
+      <div class="fh-title">"Getting ready" — choose your direction</div>
+      <div class="fh-logline">The same ritual — a woman preparing for her moment. Two completely different emotional angles. Direction A is quiet and introspective. Direction B adds a second character that reframes the whole story.</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="alt-header alt-a">
+      <div class="alt-label">DIRECTION A — original</div>
+      <div class="alt-title">"The ritual" — solo, silent, intentional</div>
+      <div class="alt-logline">Just Nitaz and the dress. No other characters. The getting-ready process as a meditation — each action deliberate, each detail captured. The occasion is never named. The dress is the only clue.</div>
+    </div>
+
+    <div class="section-title">Direction A — Scene by scene</div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 1</span><span class="scene-title">The dress before the woman</span><span class="scene-loc">Hotel room</span><span class="scene-time">0:00 – 0:15</span></div>
+      <div class="shot-row">
+        <span class="sn">1</span><span class="stype-badge">Close-up</span>
+        <span class="sdesc">The black dress laid flat on the hotel bed — cup skirt visible, embellishment catching the light. Nobody in frame. The dress is waiting.
+          <div class="action">Still shot. 3 seconds. The scroll-stopper is the question: whose dress is this, and where are they going?</div>
+        </span>
+        <span class="sdir">Style this shot carefully. The dress should look like it belongs in a magazine. Smooth the fabric, let the embellishment catch the light, keep the background clean.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 2</span><span class="scene-title">The small rituals</span><span class="scene-loc">Hotel room dressing table</span><span class="scene-time">0:15 – 0:38</span></div>
+      <div class="shot-row">
+        <span class="sn">2</span><span class="stype-badge">Close-up series</span>
+        <span class="sdesc">A sequence of close-up hands-only shots — perfume, earrings going in, a necklace being fastened, lipstick.
+          <div class="action">Four cuts, 2–3 seconds each. No face yet. Just hands and rituals.</div>
+        </span>
+        <span class="sdir">These shots build anticipation. Every woman watching recognises this ritual. It creates intimacy before the reveal.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 3</span><span class="scene-title">She puts on the dress</span><span class="scene-loc">Hotel room</span><span class="scene-time">0:38 – 0:58</span></div>
+      <div class="shot-row">
+        <span class="sn">3</span><span class="stype-badge">From behind</span>
+        <span class="sdesc">Shot from behind — she steps into the dress, pulls it up, the zip closes. The shape of the dress forms around her.
+          <div class="action">Her hands smooth the cup skirt into place. The silhouette is complete.</div>
+        </span>
+        <span class="sdir">If the back of the dress has detail, this is where it lives. If the zip is decorative, linger on it closing.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 4</span><span class="scene-title">The mirror — the full reveal</span><span class="scene-loc">Hotel room mirror</span><span class="scene-time">0:58 – 1:15</span></div>
+      <div class="shot-row key-shot">
+        <span class="sn">4</span><span class="stype-badge">Medium</span>
+        <span class="sdesc">She turns to the full-length mirror. For the first time in the film — the complete look. Face, dress, shoes. Everything.
+          <div class="action">She looks at herself. Not vanity. Satisfaction. A quiet nod. She is ready.</div>
+        </span>
+        <span class="sdir">Hold this for 4 seconds. This is the reveal that the entire film has been building toward. Do not cut away too soon. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 5</span><span class="scene-title">She leaves — and the room waits</span><span class="scene-loc">Hotel corridor</span><span class="scene-time">1:15 – 1:28</span></div>
+      <div class="shot-row">
+        <span class="sn">5</span><span class="stype-badge">Tracking</span>
+        <span class="sdesc">She walks out the door into the corridor. Tracking shot from behind — the dress moving as she walks away. The lift button is pressed. Doors open. She steps in. They close.
+          <div class="action">Cut to black the moment the doors close. Then the brand end card.</div>
+        </span>
+        <span class="sdir">The closed lift doors are the ending. The occasion is about to happen. We do not follow her — we stay behind. That restraint is what makes the ending hit.</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="alt-header alt-b">
+      <div class="alt-label">DIRECTION B — alternate</div>
+      <div class="alt-title">"The phone call" — getting ready with a best friend on the line</div>
+      <div class="alt-logline">She is getting ready and her best friend is on a video call — watching, hyping her up, reacting to the dress in real time. The friend's reactions from the phone screen become the audience surrogate. Warmer, funnier, more relatable.</div>
+    </div>
+
+    <div class="merge-note">
+      <span class="mn-label">Tone</span>
+      <span class="mn-text">Warm and fun. The friend on the call is the comedy and the emotion. Her reactions tell the audience exactly how to feel about the dress.</span>
+    </div>
+
+    <div class="section-title">Direction B — Scene by scene</div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 1</span><span class="scene-title">The call begins</span><span class="scene-loc">Hotel room</span><span class="scene-time">0:00 – 0:15</span></div>
+      <div class="shot-row">
+        <span class="sn">1</span><span class="stype-badge">Medium</span>
+        <span class="sdesc">Nitaz is at the dressing table, phone propped up against the mirror. Her friend is on the screen — already talking, already excited. Nitaz is in her pre-dress state, still getting ready.
+          <div class="action">The friend: "Okay show me the dress. Show me now." Nitaz: she smiles and points toward the dress on the bed.</div>
+        </span>
+        <span class="sdir">The friend on the phone is the hook. The audience immediately wants to see the dress because the friend does.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 2</span><span class="scene-title">The dress is revealed to the friend</span><span class="scene-loc">Hotel room</span><span class="scene-time">0:15 – 0:35</span></div>
+      <div class="shot-row key-shot">
+        <span class="sn">2</span><span class="stype-badge">Close-up</span>
+        <span class="sdesc">Nitaz holds the phone camera toward the dress on the bed. We see the friend's reaction on screen — her hand goes over her mouth. She says something we cannot fully hear but it is clearly very positive.
+          <div class="action">Cut between: the dress on the bed, the friend's reaction on screen, Nitaz's face watching her friend react.</div>
+        </span>
+        <span class="sdir">The friend's reaction to the dress is the first audience surrogate moment. Her response sets the emotional temperature for the whole video. <span class="key-badge">KEY SHOT</span></span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 3</span><span class="scene-title">She puts it on — friend watching</span><span class="scene-loc">Hotel room</span><span class="scene-time">0:35 – 0:58</span></div>
+      <div class="shot-row">
+        <span class="sn">3</span><span class="stype-badge">Medium</span>
+        <span class="sdesc">Nitaz steps into the dress off-screen. When she steps back into frame — fully dressed — the friend on the phone physically stands up on her end of the call.
+          <div class="action">The friend: speechless for a moment. Then: "Oh. Oh no. Nobody is going to be able to focus tonight."</div>
+        </span>
+        <span class="sdir">The friend standing up involuntarily is the big comedy beat of this direction. It is instinctive and real and the audience will love it.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 4</span><span class="scene-title">The mirror moment — now with witness</span><span class="scene-loc">Mirror</span><span class="scene-time">0:58 – 1:15</span></div>
+      <div class="shot-row">
+        <span class="sn">4</span><span class="stype-badge">Medium</span>
+        <span class="sdesc">Nitaz at the mirror — she turns and looks at herself. The phone is propped so the friend can see her in the mirror too. The friend goes quiet.
+          <div class="action">A rare moment of actual silence from the friend. Then quietly: "Go. They are not ready for you." Nitaz smiles. She picks up her bag.</div>
+        </span>
+        <span class="sdir">The friend going quiet is more powerful than anything she could say. Silence is the highest compliment. Play it that way.</span>
+      </div>
+    </div>
+
+    <div class="scene-block">
+      <div class="scene-header"><span class="scene-num">Scene 5</span><span class="scene-title">She leaves — the call ends</span><span class="scene-loc">Corridor</span><span class="scene-time">1:15 – 1:28</span></div>
+      <div class="shot-row">
+        <span class="sn">5</span><span class="stype-badge">Close-up</span>
+        <span class="sdesc">She ends the call — we see the screen go black. She pockets the phone. She walks out the door.
+          <div class="action">The friend is gone. It is just her and the moment now. Cut to corridor tracking shot — same ending as Direction A.</div>
+        </span>
+        <span class="sdir">Ending the call is the transition from private to public. From getting ready to being ready. The corridor shot seals it.</span>
+      </div>
+    </div>
+
+    <div class="merge-note">
+      <span class="mn-label">Merge idea</span>
+      <span class="mn-text">Open with Direction B (the phone call, the friend's reactions, the energy) then transition into Direction A's mirror moment and corridor ending — silent, solo, intentional. The warmth of B leads into the gravitas of A. The friend's last line "they are not ready for you" becomes the emotional bridge between the two halves.</span>
+    </div>
+  </div>
+</div>
+
+<script>
+function showVid(id, btn) {
+  document.querySelectorAll('.vid-block').forEach(v => v.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.vtab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
